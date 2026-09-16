@@ -1,2 +1,5 @@
 # Public
-Nothing special, learning or making something
+Nothing special, learning
+
+Someone there who can teach me about coding
+discord: honey_me_0
