@@ -1,700 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeoForge 1.21.1 Modpack</title>
-<style>
-  :root {
-    --bg-page: #0a0e17;
-    --bg-surface: #111827;
-    --bg-surface-elevated: #1a2234;
-    --bg-chip: #0d1424;
-    --border: #1f293d;
-    --border-hover: #3b82f6;
-    --text-main: #f3f4f6;
-    --text-dim: #9ca3af;
-    --accent-sky: #38bdf8;
-    --accent-emerald: #10b981;
-    --accent-violet: #8b5cf6;
-    --accent-amber: #f59e0b;
-    --tag-client: #059669;
-    --tag-client-bg: rgba(5, 150, 105, 0.15);
-    --tag-client-border: rgba(16, 185, 129, 0.35);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeoForge 1.21.1 Client Pack</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --panel: #111827;
+      --border: #1f293d;
+      --text: #f3f4f6;
+      --muted: #94a3b8;
+      --brand: #38bdf8;
+      --online: #22c55e;
+      --btn-bg: #2563eb;
+      --btn-hover: #1d4ed8;
+      --discord: #5865f2;
+    }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Open Sans", sans-serif;
-    background-color: var(--bg-page);
-    color: var(--text-main);
-    line-height: 1.6;
-    padding: 32px 16px 80px 16px;
-  }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 48px 16px;
+      display: flex;
+      justify-content: center;
+    }
 
-  .wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+    .container {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-  .hero {
-    background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 100%);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px 32px;
-    margin-bottom: 32px;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
-  }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
 
-  .meta-pills {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
+    .meta-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
 
-  .meta-pill {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 12px;
-    border-radius: 999px;
-  }
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--brand);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
 
-  .pill-version { background: #1e3a8a; color: #bfdbfe; }
-  .pill-loader { background: #4c1d95; color: #e9d5ff; }
-  .pill-status { background: #064e3b; color: #a7f3d0; }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
 
-  .hero h1 {
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: #ffffff;
-    margin-bottom: 10px;
-  }
+    .intro-text {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-bottom: 16px;
+    }
 
-  .hero p {
-    color: var(--text-dim);
-    font-size: 15px;
-    max-width: 820px;
-  }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(88, 101, 242, 0.08);
+      border: 1px solid rgba(88, 101, 242, 0.25);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      color: #c7d2fe;
+      width: fit-content;
+    }
 
-  .category-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 40px 0 16px 0;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    .contact-row svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--discord);
+    }
 
-  .category-badge {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent-sky);
-    background: #0e1d33;
-    padding: 3px 10px;
-    border-radius: 999px;
-    border: 1px solid #1e3a5f;
-  }
+    .contact-row strong {
+      color: #fff;
+    }
 
-  .card-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+    /* Action / Download */
+    .download-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-  .mod-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 20px;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-
-  .mod-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-1px);
-  }
-
-  .mod-card.client-only-card {
-    border-left: 4px solid var(--accent-emerald);
-  }
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .name-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .mod-title {
-    font-size: 17px;
-    font-weight: 700;
-    color: #60a5fa;
-    text-decoration: none;
-  }
-
-  .mod-title:hover {
-    color: #93c5fd;
-    text-decoration: underline;
-  }
-
-  .badge-client {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    background: var(--tag-client-bg);
-    color: #34d399;
-    border: 1px solid var(--tag-client-border);
-  }
-
-  .mod-desc {
-    color: var(--text-dim);
-    font-size: 13.5px;
-    margin-top: 5px;
-  }
-
-  .chain-group {
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px dashed #223048;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .chain-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 13px;
-    background: var(--bg-chip);
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #1a2538;
-  }
-
-  .chain-symbol {
-    color: var(--accent-amber);
-    font-family: monospace;
-    font-weight: 900;
-    font-size: 13px;
-  }
-
-  .chain-name {
-    color: #e5e7eb;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .chain-name:hover {
-    color: var(--accent-sky);
-    text-decoration: underline;
-  }
-
-  .chain-info {
-    color: #6b7280;
-    font-size: 12px;
-    margin-left: auto;
-  }
-
-  @media (max-width: 768px) {
-    .chain-info {
-      margin-left: 0;
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--btn-bg);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14.5px;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: 9px;
+      transition: background 0.15s ease;
       width: 100%;
     }
-  }
-</style>
+
+    .btn-download:hover {
+      background: var(--btn-hover);
+    }
+
+    .btn-download svg {
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .download-subtext {
+      font-size: 12.5px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Steps */
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-item strong {
+      color: var(--text);
+    }
+
+    .step-item code {
+      font-family: monospace;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid #1e293b;
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--brand);
+      font-size: 12px;
+    }
+
+    /* Server Status */
+    .status-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--online);
+      box-shadow: 0 0 8px var(--online);
+    }
+
+    .server-ip-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--brand);
+    }
+  </style>
 </head>
 <body>
 
-<div class="wrapper">
+  <div class="container">
 
-  <header class="hero">
-    <div class="meta-pills">
-      <span class="meta-pill pill-version">Minecraft 1.21.1</span>
-      <span class="meta-pill pill-loader">NeoForge</span>
-      <span class="meta-pill pill-status">Optimized Pack</span>
+    <!-- Top Info -->
+    <div class="card">
+      <div class="meta-row">
+        <span class="tag">Minecraft 1.21.1</span>
+        <span class="tag">NeoForge</span>
+      </div>
+      <h1>Client Modpack Installation</h1>
+      <p class="intro-text">
+        Required files for connecting to the server. All custom items, mechanisms, visual tools, and optimizations are packaged together.
+      </p>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24">
+          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+        </svg>
+        <span>Contacts: <strong>honey_me_0</strong> (Discord)</span>
+      </div>
     </div>
-    <h1>Modpack Directory</h1>
-    <p>Complete curated library featuring Create mechanics, world generation, dungeon challenges, building collections, and dedicated client-side visual tools.</p>
-    <p>Contacts: honey_me_0(discord)</p>
-  </header>
 
-<div style="margin-top: 20px;">
-    <a href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/NeoForge_1.21.1_Full_Player_Pack.zip" 
-      style="display:inline-flex; align-items:center; gap:8px; background:#10b000; color:#ffffff; font-weight:700; font-size:15px; text-decoration:none; padding:12px 22px; border-radius:8px; box-shadow:0 4px 14px rgba(16,185,129,0.35);">
-        ⬇ Download Complete Client Modpack (.ZIP)
+    <!-- Download Section -->
+    <div class="card download-section">
+      <a class="btn-download" href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/NeoForge_1.21.1_Full_Player_Pack.zip">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Client Modpack (.ZIP)
       </a>
+      <div class="download-subtext">Direct download hosted on GitHub Releases repository.</div>
     </div>
 
-
-
-  <!-- PERFORMANCE -->
-  <div class="category-title">
-    <span>Performance & Engine Optimization</span>
-    <span class="category-badge">Engine Core</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/modernfix" target="_blank">ModernFix</a>
+    <!-- Installation Instructions -->
+    <div class="card">
+      <h2>Installation Steps</h2>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>Download the <strong>NeoForge_1.21.1_Full_Player_Pack.zip</strong> file using the button above.</div>
         </div>
-      </div>
-      <div class="mod-desc">Universal engine stability fixes, memory leak reduction, and fast launching.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/ferrite-core" target="_blank">FerriteCore</a>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>Extract the contents of the downloaded <code>.zip</code> file using your file manager or an archive tool.</div>
         </div>
-      </div>
-      <div class="mod-desc">Significantly reduces RAM usage across blockstates and item models.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/badoptimizations" target="_blank">BadOptimizations</a>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>Move all extracted <code>.jar</code> files directly into your Minecraft instance's <code>mods</code> directory.</div>
         </div>
-      </div>
-      <div class="mod-desc">Streamlines entity tick routines and light engine lookups.</div>
-    </div>
-
-  </div>
-
-  <!-- CREATE & AERONAUTICS -->
-  <div class="category-title">
-    <span>Create Ecosystem & Aeronautics</span>
-    <span class="category-badge">Automation & Flight</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/create" target="_blank">Create</a>
-        </div>
-      </div>
-      <div class="mod-desc">Rotational kinetics, conveyor logistics, moving contraptions, and mechanical factory infrastructure.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://www.curseforge.com/minecraft/mc-mods/create-deco" target="_blank">Create Deco</a>
-          <span class="chain-info">Sheet metals, industrial catwalks, ladders, and props</span>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div>Launch Minecraft using the <strong>NeoForge 1.21.1</strong> profile and connect to the server.</div>
         </div>
       </div>
     </div>
 
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://github.com/Creators-of-Create/Create-Aeronautics" target="_blank">Create Aeronautics</a>
-        </div>
+    <!-- Server Status Section -->
+    <div class="card status-box">
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        <span>Server Status: Online</span>
       </div>
-      <div class="mod-desc">World-scale flying airships, physics propellers, rigid-body physics, and custom aircraft.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://github.com/Creators-of-Create/Sable" target="_blank">Sable</a>
-          <span class="chain-info">Underlying rendering and physics pipeline helper for Aeronautics</span>
-        </div>
+      <div class="server-ip-box">
+        <span>in-100.lordcloud.ovh:25525</span>
       </div>
     </div>
 
   </div>
-
-  <!-- WORLD GEN & VILLAGES -->
-  <div class="category-title">
-    <span>World Generation, Villages & Dungeons</span>
-    <span class="category-badge">Exploration</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/terralith" target="_blank">Terralith</a>
-        </div>
-      </div>
-      <div class="mod-desc">90+ unique overworld biomes and cave systems constructed using native blocks.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/lithostitched" target="_blank">Lithostitched</a>
-          <span class="chain-info">Required world generation backend</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/tectonic" target="_blank">Tectonic</a>
-        </div>
-      </div>
-      <div class="mod-desc">Massive mountain ridges, continuous realistic river courses, and deep canyon terrain.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/towns-and-towers" target="_blank">Towns and Towers</a>
-        </div>
-      </div>
-      <div class="mod-desc">Reimagines vanilla villages, adds coastal harbor ports, and builds architectural outposts.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/cristellib" target="_blank">Cristel Lib</a>
-          <span class="chain-info">Required structure placement library</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/ctov" target="_blank">ChoiceTheorem's Overhauled Village (CTOV)</a>
-        </div>
-      </div>
-      <div class="mod-desc">Large-scale, biome-themed village variants tailored for exploration.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/dungeons-arise" target="_blank">When Dungeons Arise</a>
-        </div>
-      </div>
-      <div class="mod-desc">Massive atmospheric dungeons, flying airship strongholds, and sprawling enemy fortresses.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/cloth-config" target="_blank">Cloth Config API</a>
-          <span class="chain-info">Structure configuration framework</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- BUILDING & DECOR -->
-  <div class="category-title">
-    <span>Architecture & Building Blocks</span>
-    <span class="category-badge">Decoration</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/chipped" target="_blank">Chipped</a>
-        </div>
-      </div>
-      <div class="mod-desc">Expansive texture variants for stone, wood, glass, and lanterns crafted through specialized workbenches.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/resourceful-lib" target="_blank">Resourceful Lib</a>
-          <span class="chain-info">Base registry library</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/athena" target="_blank">Athena (CTM)</a>
-          <span class="chain-info">Connected texture rendering provider</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <span class="mod-title" style="color:#e5e7eb;">Macaw's Modular Suite</span>
-        </div>
-      </div>
-      <div class="mod-desc">Modular architectural components for bridges, doors, and framed windows.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://www.curseforge.com/minecraft/mc-mods/macaws-bridges" target="_blank">Macaw's Bridges</a>
-          <span class="chain-info">Rope, stone, and wood bridges</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://www.curseforge.com/minecraft/mc-mods/macaws-doors" target="_blank">Macaw's Doors</a>
-          <span class="chain-info">Sliding, shoji, and reinforced doors</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://www.curseforge.com/minecraft/mc-mods/macaws-windows" target="_blank">Macaw's Windows</a>
-          <span class="chain-info">Framed panes, blinds, and shutters</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/handcrafted" target="_blank">Handcrafted</a>
-        </div>
-      </div>
-      <div class="mod-desc">Detailed furniture pieces, cushions, nightstands, and modular interior decor.</div>
-    </div>
-
-  </div>
-
-  <!-- FOOD & STORAGE -->
-  <div class="category-title">
-    <span>Food, Backpacks & Storage</span>
-    <span class="category-badge">Survival Utilities</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/farmers-delight" target="_blank">Farmer's Delight</a>
-        </div>
-      </div>
-      <div class="mod-desc">Culinary expansion adding cooking pots, cutting boards, crops, and nourishing prepared meals.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/sophisticated-backpacks" target="_blank">Sophisticated Backpacks</a>
-        </div>
-      </div>
-      <div class="mod-desc">Upgradable backpacks featuring auto-feed, magnet, compression, crafting, and void modules.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/sophisticated-core" target="_blank">Sophisticated Core</a>
-          <span class="chain-info">Core storage upgrade logic</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/sophisticated-storage" target="_blank">Sophisticated Storage</a>
-        </div>
-      </div>
-      <div class="mod-desc">Chests, barrels, and shulkers that accept the same modular upgrade filters as backpacks.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/comforts" target="_blank">Comforts</a>
-        </div>
-      </div>
-      <div class="mod-desc">Sleeping bags and hammocks to pass day or night without altering your personal spawn point.</div>
-    </div>
-
-  </div>
-
-  <!-- LOOT & PROGRESSION -->
-  <div class="category-title">
-    <span>Loot & Progression</span>
-    <span class="category-badge">RPG & Relics</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/lootr" target="_blank">Lootr</a>
-        </div>
-      </div>
-      <div class="mod-desc">Instanced container looting: every player receives their own loot roll from dungeon chests.</div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/apotheosis" target="_blank">Apotheosis Suite</a>
-        </div>
-      </div>
-      <div class="mod-desc">RPG weapon affix rarities, socketable stat gems, boss miniboss encounters, and deep enchanting tiers.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/apothic-attributes" target="_blank">Apothic Attributes</a>
-          <span class="chain-info">Attribute calculation engine for dynamic item stats</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-link" href="https://modrinth.com/mod/apothic-enchanting" target="_blank">Apothic Enchanting</a>
-          <span class="chain-info">Enchanting table expansion and shelf mechanics</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-link" href="https://modrinth.com/mod/apothic-spawners" target="_blank">Apothic Spawners</a>
-          <span class="chain-info">Spawner modification and mob farming upgrades</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/placebo" target="_blank">Placebo</a>
-          <span class="chain-info">Recipe parsing and event handling helper library</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/patchouli" target="_blank">Patchouli</a>
-          <span class="chain-info">Guidebook and in-game documentation engine</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/artifacts" target="_blank">Artifacts</a>
-        </div>
-      </div>
-      <div class="mod-desc">Uncraftable utility trinkets found exclusively in loot chests (jump claws, diving flippers, necklaces).</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/curios" target="_blank">Curios API</a>
-          <span class="chain-info">Equipment slot manager for rings, belts, and charms</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- CLIENT-ONLY MODS -->
-  <div class="category-title">
-    <span>Client-Side Only (Visuals & HUD)</span>
-    <span class="category-badge">Client Installed Only</span>
-  </div>
-  <div class="card-grid">
-
-    <div class="mod-card client-only-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/sodium" target="_blank">Sodium (NeoForged / Embeddium)</a>
-          <span class="badge-client">Client Only</span>
-        </div>
-      </div>
-      <div class="mod-desc">Modern OpenGL terrain rendering pipeline replacement for maximum client framerates.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/reeses-sodium-options" target="_blank">Reese's Sodium Options</a>
-          <span class="badge-client">Client Only</span>
-          <span class="chain-info">Clean, paginated video settings interface</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/iris" target="_blank">Iris Shaders</a>
-          <span class="badge-client">Client Only</span>
-          <span class="chain-info">Shaderpack engine support for modern NeoForge</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/immediatelyfast" target="_blank">ImmediatelyFast</a>
-          <span class="badge-client">Client Only</span>
-          <span class="chain-info">Accelerates text, HUD, sign, and container rendering</span>
-        </div>
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/entityculling" target="_blank">Entity Culling</a>
-          <span class="badge-client">Client Only</span>
-          <span class="chain-info">Skips rendering entities occluded behind solid blocks</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card client-only-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/emi" target="_blank">EMI</a>
-          <span class="badge-client">Client Only</span>
-        </div>
-      </div>
-      <div class="mod-desc">Fast, modern recipe indexing and crafting tree preview viewer.</div>
-    </div>
-
-    <div class="mod-card client-only-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/jade" target="_blank">Jade</a>
-          <span class="badge-client">Client Only</span>
-        </div>
-      </div>
-      <div class="mod-desc">On-screen targeting tooltips showing block status, fluid levels, and Create mechanical stress.</div>
-    </div>
-
-    <div class="mod-card client-only-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/xaeros-minimap" target="_blank">Xaero's Minimap</a>
-          <span class="badge-client">Client Only</span>
-        </div>
-      </div>
-      <div class="mod-desc">Lightweight corner radar minimap with waypoint marker integration.</div>
-      <div class="chain-group">
-        <div class="chain-row">
-          <span class="chain-symbol">-\</span>
-          <a class="chain-name" href="https://modrinth.com/mod/xaeros-world-map" target="_blank">Xaero's World Map</a>
-          <span class="badge-client">Client Only</span>
-          <span class="chain-info">Full-screen world explorer map</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="mod-card client-only-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/mouse-tweaks" target="_blank">Mouse Tweaks</a>
-          <span class="badge-client">Client Only</span>
-        </div>
-      </div>
-      <div class="mod-desc">Drag-and-drop inventory item distribution and rapid click sorting.</div>
-    </div>
-
-    <div class="mod-card client-only-card">
-      <div class="card-header">
-        <div class="name-group">
-          <a class="mod-title" href="https://modrinth.com/mod/appleskin" target="_blank">AppleSkin</a>
-          <span class="badge-client">Client Only</span>
-        </div>
-      </div>
-      <div class="mod-desc">Displays food saturation values and potential health recovery directly on the HUD.</div>
-    </div>
-
-  </div>
-
-</div>
 
 </body>
 </html>
