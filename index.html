@@ -8,14 +8,17 @@
     :root {
       --bg: #090d16;
       --panel: #111827;
+      --panel-hover: #162032;
       --border: #1f293d;
       --text: #f3f4f6;
       --muted: #94a3b8;
       --brand: #38bdf8;
+      --brand-glow: rgba(56, 189, 248, 0.15);
       --online: #22c55e;
       --btn-bg: #2563eb;
       --btn-hover: #1d4ed8;
       --discord: #5865f2;
+      --tag-bg: #1e293b;
     }
 
     * {
@@ -29,14 +32,14 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 48px 16px;
+      padding: 48px 16px 80px 16px;
       display: flex;
       justify-content: center;
     }
 
     .container {
       width: 100%;
-      max-width: 680px;
+      max-width: 740px;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -69,9 +72,9 @@
     }
 
     h1 {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 800;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.4px;
       margin-bottom: 8px;
     }
 
@@ -87,7 +90,7 @@
       gap: 8px;
       background: rgba(88, 101, 242, 0.08);
       border: 1px solid rgba(88, 101, 242, 0.25);
-      padding: 8px 12px;
+      padding: 8px 14px;
       border-radius: 8px;
       font-size: 13.5px;
       color: #c7d2fe;
@@ -104,11 +107,11 @@
       color: #fff;
     }
 
-    /* Action / Download */
+    /* Download */
     .download-section {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .btn-download {
@@ -119,21 +122,22 @@
       background: var(--btn-bg);
       color: #ffffff;
       font-weight: 700;
-      font-size: 14.5px;
+      font-size: 15px;
       text-decoration: none;
-      padding: 13px 20px;
-      border-radius: 9px;
-      transition: background 0.15s ease;
+      padding: 14px 20px;
+      border-radius: 10px;
+      transition: background 0.15s ease, transform 0.1s ease;
       width: 100%;
     }
 
     .btn-download:hover {
       background: var(--btn-hover);
+      transform: translateY(-1px);
     }
 
     .btn-download svg {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       stroke: currentColor;
       stroke-width: 2.2;
       stroke-linecap: round;
@@ -147,7 +151,7 @@
       text-align: center;
     }
 
-    /* Steps */
+    /* Section Headings */
     h2 {
       font-size: 16px;
       font-weight: 700;
@@ -158,6 +162,92 @@
       gap: 8px;
     }
 
+    /* Status Box */
+    .status-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--online);
+      box-shadow: 0 0 8px var(--online);
+    }
+
+    .server-ip-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s;
+    }
+
+    .server-ip-wrapper:hover {
+      border-color: var(--brand);
+    }
+
+    .server-ip-wrapper span {
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--brand);
+    }
+
+    .server-ip-wrapper svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--muted);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .feature-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .feature-card h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 4px;
+    }
+
+    .feature-card p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Steps */
     .step-list {
       display: flex;
       flex-direction: column;
@@ -188,10 +278,6 @@
       margin-top: 1px;
     }
 
-    .step-item strong {
-      color: var(--text);
-    }
-
     .step-item code {
       font-family: monospace;
       background: rgba(0, 0, 0, 0.3);
@@ -202,43 +288,48 @@
       font-size: 12px;
     }
 
-    /* Server Status */
-    .status-box {
+    /* Tags Cloud */
+    .mods-cloud {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 8px;
+      margin-top: 6px;
     }
 
-    .status-badge {
+    .mod-pill {
+      font-size: 12px;
+      font-family: monospace;
+      color: #cbd5e1;
+      background: var(--tag-bg);
+      border: 1px solid #28354b;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* Specs Specs List */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .spec-item {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13.5px;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .spec-label {
+      color: var(--muted);
+    }
+
+    .spec-val {
       font-weight: 600;
       color: #fff;
-    }
-
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--online);
-      box-shadow: 0 0 8px var(--online);
-    }
-
-    .server-ip-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-family: monospace;
-      font-size: 13px;
-      color: var(--brand);
     }
   </style>
 </head>
@@ -246,15 +337,16 @@
 
   <div class="container">
 
-    <!-- Top Info -->
+    <!-- Top Card -->
     <div class="card">
       <div class="meta-row">
         <span class="tag">Minecraft 1.21.1</span>
-        <span class="tag">NeoForge</span>
+        <span class="tag">NeoForge 21.1.x</span>
+        <span class="tag">Release v1.0.0</span>
       </div>
       <h1>Client Modpack Installation</h1>
       <p class="intro-text">
-        Required files for connecting to the server. All custom items, mechanisms, visual tools, and optimizations are packaged together.
+        Required files for connecting to the server. All custom items, kinetic assemblies, world structures, visual tools, and performance engines are packaged into a single bundle.
       </p>
       <div class="contact-row">
         <svg viewBox="0 0 24 24">
@@ -264,7 +356,7 @@
       </div>
     </div>
 
-    <!-- Download Section -->
+    <!-- Download Card -->
     <div class="card download-section">
       <a class="btn-download" href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/NeoForge_1.21.1_Full_Player_Pack.zip">
         <svg viewBox="0 0 24 24">
@@ -276,8 +368,32 @@
       </a>
       <div class="download-subtext">Direct download hosted on GitHub Releases repository.</div>
     </div>
+ 
 
-    <!-- Installation Instructions -->
+    <!-- Gameplay Highlights / Features Grid -->
+    <div class="card">
+      <h2>Pack Features & Content</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Create Kinetics</h3>
+          <p>Full rotational mechanics, automated factory conveyors, and mechanical assemblies.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Custom Generation</h3>
+          <p>Terralith biomes, deep Tectonic river canyons, and overhauled themed villages.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Instanced Looting</h3>
+          <p>Lootr chests give each player dedicated rewards so raided dungeons never run dry.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Optimized Visuals</h3>
+          <p>Bundled with Sodium rendering, Iris shaderpack support, and entity culling engines.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation Steps -->
     <div class="card">
       <h2>Installation Steps</h2>
       <div class="step-list">
@@ -287,21 +403,83 @@
         </div>
         <div class="step-item">
           <div class="step-num">2</div>
-          <div>Extract the contents of the downloaded <code>.zip</code> file using your file manager or an archive tool.</div>
+          <div>Extract the contents of the downloaded <code>.zip</code> file using an archive manager.</div>
         </div>
         <div class="step-item">
           <div class="step-num">3</div>
-          <div>Move all extracted <code>.jar</code> files directly into your Minecraft instance's <code>mods</code> directory.</div>
+          <div>Copy all extracted <code>.jar</code> files into your launcher profile's <code>mods</code> directory.</div>
         </div>
         <div class="step-item">
           <div class="step-num">4</div>
-          <div>Launch Minecraft using the <strong>NeoForge 1.21.1</strong> profile and connect to the server.</div>
+          <div>Launch Minecraft using the <strong>NeoForge 1.21.1</strong> loader and connect to the server IP.</div>
         </div>
       </div>
     </div>
 
+    <!-- Core Mods List Tags -->
+    <div class="card">
+      <h2>Key Bundled Mods</h2>
+      <div class="mods-cloud">
+        <span class="mod-pill">Create 6.0</span>
+        <span class="mod-pill">Create Deco</span>
+        <span class="mod-pill">Terralith</span>
+        <span class="mod-pill">Tectonic</span>
+        <span class="mod-pill">Towns & Towers</span>
+        <span class="mod-pill">CTOV</span>
+        <span class="mod-pill">When Dungeons Arise</span>
+        <span class="mod-pill">Farmer's Delight</span>
+        <span class="mod-pill">Sophisticated Backpacks</span>
+        <span class="mod-pill">Sophisticated Storage</span>
+        <span class="mod-pill">Lootr</span>
+        <span class="mod-pill">Apotheosis</span>
+        <span class="mod-pill">Artifacts</span>
+        <span class="mod-pill">Chipped</span>
+        <span class="mod-pill">Macaw's Bridges & Doors</span>
+        <span class="mod-pill">Sodium</span>
+        <span class="mod-pill">Iris Shaders</span>
+        <span class="mod-pill">Jade</span>
+        <span class="mod-pill">EMI</span>
+        <span class="mod-pill">Xaero's Minimap & World Map</span>
+      </div>
+    </div>
+
+    <!-- Specifications / Requirements -->
+    <div class="card">
+      <h2>Client Specifications</h2>
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span class="spec-label">Java Version</span>
+          <span class="spec-val">Java 21</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Loader</span>
+          <span class="spec-val">NeoForge 21.1.x</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Allocated RAM</span>
+          <span class="spec-val">4 GB – 6 GB</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Compatibility</span>
+          <span class="spec-val">Windows, Linux, Mac, Pojav</span>
+        </div>
+      </div>
+    </div>
 
   </div>
+
+  <script>
+    function copyIP() {
+      const ip = document.getElementById("ipText").innerText;
+      navigator.clipboard.writeText(ip).then(() => {
+        const originalText = document.getElementById("ipText").innerText;
+        document.getElementById("ipText").innerText = "Copied to clipboard!";
+        setTimeout(() => {
+          document.getElementById("ipText").innerText = originalText;
+        }, 1600);
+      });
+    }
+  </script>
 
 </body>
 </html>
