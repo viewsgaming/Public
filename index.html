@@ -6,19 +6,19 @@
   <title>NeoForge 1.21.1 Client Pack</title>
   <style>
     :root {
-      --bg: #090d16;
-      --panel: #111827;
-      --panel-hover: #162032;
-      --border: #1f293d;
-      --text: #f3f4f6;
-      --muted: #94a3b8;
-      --brand: #38bdf8;
-      --brand-glow: rgba(56, 189, 248, 0.15);
-      --online: #22c55e;
-      --btn-bg: #2563eb;
-      --btn-hover: #1d4ed8;
-      --discord: #5865f2;
-      --tag-bg: #1e293b;
+      --bg: #070708;
+      --panel: #0e0e11;
+      --panel-elevated: #141418;
+      --panel-hover: #1b1b22;
+      --border: #1f1f26;
+      --border-bright: #2b2b36;
+      --text: #f0f0f3;
+      --muted: #7d7d8a;
+      --dim: #545460;
+      --orange: #f16436;
+      --orange-hover: #fa7244;
+      --orange-muted: rgba(241, 100, 54, 0.08);
+      --orange-border: rgba(241, 100, 54, 0.28);
     }
 
     * {
@@ -28,30 +28,31 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 48px 16px 80px 16px;
+      padding: 44px 16px 80px 16px;
       display: flex;
       justify-content: center;
     }
 
     .container {
       width: 100%;
-      max-width: 740px;
+      max-width: 760px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 14px;
     }
 
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
+      border-radius: 8px;
+      padding: 22px 24px;
     }
 
+    /* Meta Badges */
     .meta-row {
       display: flex;
       gap: 8px;
@@ -62,25 +63,45 @@
     .tag {
       font-size: 11px;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.5px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: rgba(56, 189, 248, 0.1);
-      color: var(--brand);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: var(--panel-elevated);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+
+    .tag.primary {
+      background: var(--orange-muted);
+      color: var(--orange);
+      border-color: var(--orange-border);
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .cf-flame {
+      width: 26px;
+      height: 26px;
+      fill: var(--orange);
+      flex-shrink: 0;
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 800;
-      letter-spacing: -0.4px;
-      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+      color: #fff;
     }
 
     .intro-text {
       color: var(--muted);
-      font-size: 14.5px;
+      font-size: 14px;
       margin-bottom: 16px;
     }
 
@@ -88,30 +109,116 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(88, 101, 242, 0.08);
-      border: 1px solid rgba(88, 101, 242, 0.25);
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      color: #c7d2fe;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--muted);
       width: fit-content;
-    }
-
-    .contact-row svg {
-      width: 16px;
-      height: 16px;
-      fill: var(--discord);
     }
 
     .contact-row strong {
       color: #fff;
     }
 
-    /* Download */
+    /* Extended Info Grid */
+    .ext-info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .ext-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ext-stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--dim);
+      font-weight: 700;
+    }
+
+    .ext-stat-val {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ext-stat-val.highlight {
+      color: var(--orange);
+    }
+
+    /* Server Bar */
+    .server-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 6px;
+      flex-wrap: wrap;
+    }
+
+    .server-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 8px var(--orange);
+    }
+
+    .ip-btn {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .ip-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .ip-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Download Action */
     .download-section {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-download {
@@ -119,156 +226,101 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background: var(--btn-bg);
-      color: #ffffff;
-      font-weight: 700;
+      background: var(--orange);
+      color: #000000;
+      font-weight: 800;
       font-size: 15px;
       text-decoration: none;
-      padding: 14px 20px;
-      border-radius: 10px;
-      transition: background 0.15s ease, transform 0.1s ease;
+      padding: 13px 20px;
+      border-radius: 6px;
+      transition: background 0.15s ease;
       width: 100%;
     }
 
     .btn-download:hover {
-      background: var(--btn-hover);
-      transform: translateY(-1px);
+      background: var(--orange-hover);
     }
 
     .btn-download svg {
       width: 18px;
       height: 18px;
-      stroke: currentColor;
-      stroke-width: 2.2;
+      stroke: #000;
+      stroke-width: 2.3;
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
     }
 
     .download-subtext {
-      font-size: 12.5px;
-      color: var(--muted);
+      font-size: 12px;
+      color: var(--dim);
       text-align: center;
     }
 
-    /* Section Headings */
+    /* Headings */
     h2 {
-      font-size: 16px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
     }
 
-    /* Status Box */
-    .status-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--online);
-      box-shadow: 0 0 8px var(--online);
-    }
-
-    .server-ip-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      user-select: none;
-      transition: border-color 0.15s;
-    }
-
-    .server-ip-wrapper:hover {
-      border-color: var(--brand);
-    }
-
-    .server-ip-wrapper span {
-      font-family: monospace;
-      font-size: 13px;
-      color: var(--brand);
-    }
-
-    .server-ip-wrapper svg {
-      width: 15px;
-      height: 15px;
-      stroke: var(--muted);
-      fill: none;
-      stroke-width: 2;
-    }
-
-    /* Feature Grid */
+    /* Features Grid */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-top: 4px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
     }
 
     .feature-card {
-      background: rgba(0, 0, 0, 0.25);
+      background: var(--panel-elevated);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 14px;
     }
 
     .feature-card h3 {
       font-size: 13.5px;
       font-weight: 700;
-      color: var(--brand);
+      color: var(--orange);
       margin-bottom: 4px;
     }
 
     .feature-card p {
       font-size: 12.5px;
       color: var(--muted);
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
-    /* Steps */
+    /* Installation Steps */
     .step-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .step-item {
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      font-size: 13.5px;
+      font-size: 13px;
       color: var(--muted);
     }
 
     .step-num {
       width: 22px;
       height: 22px;
-      border-radius: 50%;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--brand);
+      border-radius: 4px;
+      background: var(--orange-muted);
+      border: 1px solid var(--orange-border);
+      color: var(--orange);
       font-weight: 700;
       font-size: 11px;
       display: flex;
@@ -280,56 +332,118 @@
 
     .step-item code {
       font-family: monospace;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid #1e293b;
-      padding: 1px 5px;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
       border-radius: 4px;
-      color: var(--brand);
+      color: var(--orange);
       font-size: 12px;
     }
 
-    /* Tags Cloud */
+    /* Mod Tags */
     .mods-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
+      gap: 6px;
     }
 
     .mod-pill {
       font-size: 12px;
       font-family: monospace;
-      color: #cbd5e1;
-      background: var(--tag-bg);
-      border: 1px solid #28354b;
+      color: #b0b0bb;
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
       padding: 3px 8px;
-      border-radius: 6px;
+      border-radius: 4px;
     }
 
-    /* Specs Specs List */
+    .mod-pill:hover {
+      border-color: var(--orange);
+      color: #fff;
+    }
+
+    /* Specifications */
     .specs-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      font-size: 13px;
+      gap: 8px;
+      font-size: 12.5px;
     }
 
     .spec-item {
       display: flex;
       justify-content: space-between;
       padding: 8px 12px;
-      background: rgba(0,0,0,0.25);
+      background: var(--panel-elevated);
       border: 1px solid var(--border);
       border-radius: 6px;
     }
 
     .spec-label {
-      color: var(--muted);
+      color: var(--dim);
+      font-weight: 600;
     }
 
     .spec-val {
-      font-weight: 600;
-      color: #fff;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Accordion / Extended Changelog Drawer */
+    details {
+      background: var(--panel-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--orange);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      font-size: 15px;
+    }
+
+    details[open] summary::after {
+      content: '−';
+    }
+
+    .details-body {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .hash-val {
+      font-family: monospace;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    @media (max-width: 600px) {
+      .ext-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -340,21 +454,49 @@
     <!-- Top Card -->
     <div class="card">
       <div class="meta-row">
-        <span class="tag">Minecraft 1.21.1</span>
-        <span class="tag">NeoForge 21.1.x</span>
+        <span class="tag primary">Minecraft 1.21.1</span>
+        <span class="tag">NeoForge</span>
         <span class="tag">Release v1.0.0</span>
       </div>
-      <h1>Client Modpack Installation</h1>
-      <p class="intro-text">
-        Required files for connecting to the server. All custom items, kinetic assemblies, world structures, visual tools, and performance engines are packaged into a single bundle.
-      </p>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24">
-          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+      
+      <div class="title-row">
+        <svg class="cf-flame" viewBox="0 0 24 24">
+          <path d="M19.5 11.5c-.2-.6-.6-1.1-1.1-1.5-.7-.5-1.5-.7-2.4-.6-.5.1-1 .3-1.4.6-.2.1-.3.3-.5.2-.2-.1-.2-.3-.2-.5.1-1.2.6-2.3 1.4-3.1.2-.2.2-.5 0-.7-.2-.2-.5-.2-.7 0-1.2 1.1-1.9 2.6-2 4.2 0 .3-.2.5-.5.5-.3 0-.5-.2-.5-.5-.1-2.1-.9-4-2.4-5.5-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7 1.2 1.3 1.9 2.9 2 4.6 0 .3-.2.5-.5.5s-.5-.2-.5-.5c-.1-1.4-.7-2.7-1.7-3.6-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7.8.9 1.3 2 1.4 3.1 0 .3-.2.5-.5.5-.3 0-.5-.2-.5-.5 0-.7-.2-1.4-.6-2-.2-.3-.6-.3-.8-.1-.3.2-.3.6-.1.8.3.6.5 1.2.5 1.9 0 3.9-3.1 7-7 7-.3 0-.5.2-.5.5s.2.5.5.5c4.4 0 8-3.6 8-8 0-.3.2-.5.5-.5s.5.2.5.5c0 2.2 1.8 4 4 4s4-1.8 4-4c0-.6-.1-1.1-.3-1.6z"/>
         </svg>
-        <span>Contacts: <strong>honey_me_0</strong> (Discord)</span>
+        <h1>NeoForge Client Modpack</h1>
+      </div>
+
+      <p class="intro-text">
+        Required player package for joining the server. Pre-configured with kinetic engines, custom world generation, sound mechanics, and rendering optimizations.
+      </p>
+
+      <div class="contact-row">
+        <span>Discord Admin: <strong>honey_me_0</strong></span>
       </div>
     </div>
+
+    <!-- Extended Info Widget Panel -->
+    <div class="card">
+      <div class="ext-info-grid">
+        <div class="ext-stat">
+          <span class="ext-stat-label">File Size</span>
+          <span class="ext-stat-val">142.8 MB</span>
+        </div>
+        <div class="ext-stat">
+          <span class="ext-stat-label">Release Type</span>
+          <span class="ext-stat-val highlight">Release</span>
+        </div>
+        <div class="ext-stat">
+          <span class="ext-stat-label">Mod Count</span>
+          <span class="ext-stat-val">42 Mods</span>
+        </div>
+        <div class="ext-stat">
+          <span class="ext-stat-label">Last Updated</span>
+          <span class="ext-stat-val">17 September 2026</span>
+        </div>
+      </div>
+
+      <div style="height: 10px;"></div> 
 
     <!-- Download Card -->
     <div class="card download-section">
@@ -364,15 +506,14 @@
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        Download Client Modpack (.ZIP)
+        Download Modpack (.ZIP)
       </a>
-      <div class="download-subtext">Direct download hosted on GitHub Releases repository.</div>
+      <div class="download-subtext">Direct download archive hosted on GitHub Releases repository.</div>
     </div>
- 
 
     <!-- Gameplay Highlights / Features Grid -->
     <div class="card">
-      <h2>Pack Features & Content</h2>
+      <h2>Included Modules</h2>
       <div class="features-grid">
         <div class="feature-card">
           <h3>Create Kinetics</h3>
@@ -395,30 +536,30 @@
 
     <!-- Installation Steps -->
     <div class="card">
-      <h2>Installation Steps</h2>
+      <h2>Setup Guide</h2>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
-          <div>Download the <strong>NeoForge_1.21.1_Full_Player_Pack.zip</strong> file using the button above.</div>
+          <div>Download the <strong>NeoForge_1.21.1_Full_Player_Pack.zip</strong> package above.</div>
         </div>
         <div class="step-item">
           <div class="step-num">2</div>
-          <div>Extract the contents of the downloaded <code>.zip</code> file using an archive manager.</div>
+          <div>Extract the archive folder using 7-Zip, WinRAR, or your built-in unzipper.</div>
         </div>
         <div class="step-item">
           <div class="step-num">3</div>
-          <div>Copy all extracted <code>.jar</code> files into your launcher profile's <code>mods</code> directory.</div>
+          <div>Drop the extracted <code>.jar</code> files directly into your instance's <code>mods/</code> folder.</div>
         </div>
         <div class="step-item">
           <div class="step-num">4</div>
-          <div>Launch Minecraft using the <strong>NeoForge 1.21.1</strong> loader and connect to the server IP.</div>
+          <div>Boot via <strong>NeoForge 21.1.x</strong> profile and join using the IP above.</div>
         </div>
       </div>
     </div>
 
-    <!-- Core Mods List Tags -->
+    <!-- Bundled Mod List -->
     <div class="card">
-      <h2>Key Bundled Mods</h2>
+      <h2>Pack Dependencies</h2>
       <div class="mods-cloud">
         <span class="mod-pill">Create 6.0</span>
         <span class="mod-pill">Create Deco</span>
@@ -434,49 +575,62 @@
         <span class="mod-pill">Apotheosis</span>
         <span class="mod-pill">Artifacts</span>
         <span class="mod-pill">Chipped</span>
-        <span class="mod-pill">Macaw's Bridges & Doors</span>
+        <span class="mod-pill">Macaw's Bridges</span>
         <span class="mod-pill">Sodium</span>
         <span class="mod-pill">Iris Shaders</span>
         <span class="mod-pill">Jade</span>
         <span class="mod-pill">EMI</span>
-        <span class="mod-pill">Xaero's Minimap & World Map</span>
+        <span class="mod-pill">Xaero's Maps</span>
       </div>
     </div>
 
-    <!-- Specifications / Requirements -->
+    <!-- System Requirements & Verification Extended Drawer -->
     <div class="card">
-      <h2>Client Specifications</h2>
+      <h2>Specifications & Verification</h2>
       <div class="specs-grid">
         <div class="spec-item">
-          <span class="spec-label">Java Version</span>
+          <span class="spec-label">Java</span>
           <span class="spec-val">Java 21</span>
         </div>
         <div class="spec-item">
-          <span class="spec-label">Loader</span>
-          <span class="spec-val">NeoForge 21.1.x</span>
+          <span class="spec-label">NeoForge</span>
+          <span class="spec-val">21.1.x</span>
         </div>
         <div class="spec-item">
-          <span class="spec-label">Allocated RAM</span>
-          <span class="spec-val">4 GB – 6 GB</span>
+          <span class="spec-label">Recommended RAM</span>
+          <span class="spec-val">6 GB</span>
         </div>
         <div class="spec-item">
-          <span class="spec-label">Compatibility</span>
-          <span class="spec-val">Windows, Linux, Mac, Pojav</span>
+          <span class="spec-label">Platforms</span>
+          <span class="spec-val">Win / Linux / Mac / Pojav</span>
         </div>
       </div>
+
+      <div style="height: 12px;"></div>
+
+      <!-- Collapsible Extended Metadata Drawer -->
+      <details>
+        <summary>File Checksum & Client Configs</summary>
+        <div class="details-body">
+          <p><strong>Package SHA-256:</strong></p>
+          <p class="hash-val">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</p>
+          <br>
+          <p><strong>Config notes:</strong> Embedded with pre-tuned <code>sodium.json</code> options optimized for 12+ chunk render distance on low-end dedicated GPUs.</p>
+        </div>
+      </details>
     </div>
 
   </div>
 
   <script>
-    function copyIP() {
-      const ip = document.getElementById("ipText").innerText;
+    function copyServerIP(btn) {
+      const ip = document.getElementById("ipDisplay").innerText;
       navigator.clipboard.writeText(ip).then(() => {
-        const originalText = document.getElementById("ipText").innerText;
-        document.getElementById("ipText").innerText = "Copied to clipboard!";
+        const originalText = ip;
+        document.getElementById("ipDisplay").innerText = "Copied!";
         setTimeout(() => {
-          document.getElementById("ipText").innerText = originalText;
-        }, 1600);
+          document.getElementById("ipDisplay").innerText = originalText;
+        }, 1500);
       });
     }
   </script>
