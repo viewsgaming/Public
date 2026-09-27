@@ -4,636 +4,198 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeoForge 1.21.1 Client Pack</title>
-  <style>
-    :root {
-      --bg: #070708;
-      --panel: #0e0e11;
-      --panel-elevated: #141418;
-      --panel-hover: #1b1b22;
-      --border: #1f1f26;
-      --border-bright: #2b2b36;
-      --text: #f0f0f3;
-      --muted: #7d7d8a;
-      --dim: #545460;
-      --orange: #f16436;
-      --orange-hover: #fa7244;
-      --orange-muted: rgba(241, 100, 54, 0.08);
-      --orange-border: rgba(241, 100, 54, 0.28);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 44px 16px 80px 16px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 760px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 22px 24px;
-    }
-
-    /* Meta Badges */
-    .meta-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      padding: 3px 9px;
-      border-radius: 4px;
-      background: var(--panel-elevated);
-      color: var(--muted);
-      border: 1px solid var(--border);
-      text-transform: uppercase;
-    }
-
-    .tag.primary {
-      background: var(--orange-muted);
-      color: var(--orange);
-      border-color: var(--orange-border);
-    }
-
-    .title-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .cf-flame {
-      width: 26px;
-      height: 26px;
-      fill: var(--orange);
-      flex-shrink: 0;
-    }
-
-    h1 {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-      color: #fff;
-    }
-
-    .intro-text {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    .contact-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      color: var(--muted);
-      width: fit-content;
-    }
-
-    .contact-row strong {
-      color: #fff;
-    }
-
-    /* Extended Info Grid */
-    .ext-info-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 12px;
-    }
-
-    .ext-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .ext-stat-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      color: var(--dim);
-      font-weight: 700;
-    }
-
-    .ext-stat-val {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .ext-stat-val.highlight {
-      color: var(--orange);
-    }
-
-    /* Server Bar */
-    .server-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 6px;
-      flex-wrap: wrap;
-    }
-
-    .server-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--orange);
-      box-shadow: 0 0 8px var(--orange);
-    }
-
-    .ip-btn {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: monospace;
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: border-color 0.15s, color 0.15s;
-    }
-
-    .ip-btn:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
-
-    .ip-btn svg {
-      width: 14px;
-      height: 14px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-    }
-
-    /* Download Action */
-    .download-section {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .btn-download {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--orange);
-      color: #000000;
-      font-weight: 800;
-      font-size: 15px;
-      text-decoration: none;
-      padding: 13px 20px;
-      border-radius: 6px;
-      transition: background 0.15s ease;
-      width: 100%;
-    }
-
-    .btn-download:hover {
-      background: var(--orange-hover);
-    }
-
-    .btn-download svg {
-      width: 18px;
-      height: 18px;
-      stroke: #000;
-      stroke-width: 2.3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-    }
-
-    .download-subtext {
-      font-size: 12px;
-      color: var(--dim);
-      text-align: center;
-    }
-
-    /* Headings */
-    h2 {
-      font-size: 14.5px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    /* Features Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 10px;
-    }
-
-    .feature-card {
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px;
-    }
-
-    .feature-card h3 {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--orange);
-      margin-bottom: 4px;
-    }
-
-    .feature-card p {
-      font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    /* Installation Steps */
-    .step-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .step-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .step-num {
-      width: 22px;
-      height: 22px;
-      border-radius: 4px;
-      background: var(--orange-muted);
-      border: 1px solid var(--orange-border);
-      color: var(--orange);
-      font-weight: 700;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .step-item code {
-      font-family: monospace;
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      padding: 1px 6px;
-      border-radius: 4px;
-      color: var(--orange);
-      font-size: 12px;
-    }
-
-    /* Mod Tags */
-    .mods-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .mod-pill {
-      font-size: 12px;
-      font-family: monospace;
-      color: #b0b0bb;
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    .mod-pill:hover {
-      border-color: var(--orange);
-      color: #fff;
-    }
-
-    /* Specifications */
-    .specs-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      font-size: 12.5px;
-    }
-
-    .spec-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-    }
-
-    .spec-label {
-      color: var(--dim);
-      font-weight: 600;
-    }
-
-    .spec-val {
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    /* Accordion / Extended Changelog Drawer */
-    details {
-      background: var(--panel-elevated);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
-      font-size: 13px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--orange);
-      list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      user-select: none;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::after {
-      content: '+';
-      font-size: 15px;
-    }
-
-    details[open] summary::after {
-      content: '−';
-    }
-
-    .details-body {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.6;
-    }
-
-    .hash-val {
-      font-family: monospace;
-      color: var(--text);
-      word-break: break-all;
-    }
-
-    @media (max-width: 600px) {
-      .ext-info-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .specs-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
   <div class="container">
 
-    <!-- Top Card -->
-    <div class="card">
-      <div class="meta-row">
-        <span class="tag primary">Minecraft 1.21.1</span>
-        <span class="tag">NeoForge</span>
-        <span class="tag">Release v1.0.0</span>
-      </div>
-      
-      <div class="title-row">
-        <svg class="cf-flame" viewBox="0 0 24 24">
-          <path d="M19.5 11.5c-.2-.6-.6-1.1-1.1-1.5-.7-.5-1.5-.7-2.4-.6-.5.1-1 .3-1.4.6-.2.1-.3.3-.5.2-.2-.1-.2-.3-.2-.5.1-1.2.6-2.3 1.4-3.1.2-.2.2-.5 0-.7-.2-.2-.5-.2-.7 0-1.2 1.1-1.9 2.6-2 4.2 0 .3-.2.5-.5.5-.3 0-.5-.2-.5-.5-.1-2.1-.9-4-2.4-5.5-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7 1.2 1.3 1.9 2.9 2 4.6 0 .3-.2.5-.5.5s-.5-.2-.5-.5c-.1-1.4-.7-2.7-1.7-3.6-.2-.2-.5-.2-.7 0-.2.2-.2.5 0 .7.8.9 1.3 2 1.4 3.1 0 .3-.2.5-.5.5-.3 0-.5-.2-.5-.5 0-.7-.2-1.4-.6-2-.2-.3-.6-.3-.8-.1-.3.2-.3.6-.1.8.3.6.5 1.2.5 1.9 0 3.9-3.1 7-7 7-.3 0-.5.2-.5.5s.2.5.5.5c4.4 0 8-3.6 8-8 0-.3.2-.5.5-.5s.5.2.5.5c0 2.2 1.8 4 4 4s4-1.8 4-4c0-.6-.1-1.1-.3-1.6z"/>
-        </svg>
-        <h1>NeoForge Client Modpack</h1>
+    <!-- Hero Card -->
+    <header class="card hero-card">
+      <div class="badge-row">
+        <span class="badge badge-accent" id="tagVersion">v1.0.0</span>
+        <span class="badge">Minecraft 1.21.1</span>
+        <span class="badge">NeoForge Only</span>
       </div>
 
-      <p class="intro-text">
-        Required player package for joining the server. Pre-configured with kinetic engines, custom world generation, sound mechanics, and rendering optimizations.
+      <h1 id="releaseTitle">NeoForge 1.21.1 Client Pack</h1>
+      <p class="hero-desc">
+        Everything you need to join our private world without mismatched blocks or crash screens. Includes Create 6.0 machinery, custom world gen biomes, instanced loot, sound physics, and low-end shader optimizations.
       </p>
 
-      <div class="contact-row">
-        <span>Discord Admin: <strong>honey_me_0</strong></span>
+      <div class="admin-notice">
+        <div class="admin-avatar">H</div>
+        <div class="admin-info">
+          <span class="admin-name">Maintained by honey_me_0</span>
+          <span class="admin-help">Need whitelist or help installing? Message me on Discord.</span>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <!-- Extended Info Widget Panel -->
-    <div class="card">
-      <div class="ext-info-grid">
-        <div class="ext-stat">
-          <span class="ext-stat-label">File Size</span>
-          <span class="ext-stat-val">142.8 MB</span>
+    <!-- Download & Live Stats Block -->
+    <section class="card download-card">
+      <div class="download-top">
+        <div>
+          <h2 class="section-title">Ready to Play?</h2>
+          <p class="section-subtitle">Always download the latest build before joining to prevent sync disconnects.</p>
         </div>
-        <div class="ext-stat">
-          <span class="ext-stat-label">Release Type</span>
-          <span class="ext-stat-val highlight">Release</span>
-        </div>
-        <div class="ext-stat">
-          <span class="ext-stat-label">Mod Count</span>
-          <span class="ext-stat-val">42 Mods</span>
-        </div>
-        <div class="ext-stat">
-          <span class="ext-stat-label">Last Updated</span>
-          <span class="ext-stat-val">17 September 2026</span>
+        <div class="live-status">
+          <span class="pulse-dot"></span>
+          <span>Build verified</span>
         </div>
       </div>
 
-      <div style="height: 10px;"></div> 
-
-    <!-- Download Card -->
-    <div class="card download-section">
-      <a class="btn-download" href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/NeoForge_1.21.1_Full_Player_Pack.zip">
-        <svg viewBox="0 0 24 24">
+      <a class="btn-download" id="downloadBtn" href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/NeoForge_1.21.1_Full_Player_Pack.zip">
+        <svg viewBox="0 0 24 24" class="dl-icon">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        Download Modpack (.ZIP)
+        <span class="dl-text">
+          <strong>Download Full Package (.ZIP)</strong>
+          <small id="fileName">NeoForge_1.21.1_Full_Player_Pack.zip</small>
+        </span>
       </a>
-      <div class="download-subtext">Direct download archive hosted on GitHub Releases repository.</div>
-    </div>
 
-    <!-- Gameplay Highlights / Features Grid -->
-    <div class="card">
-      <h2>Included Modules</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>Create Kinetics</h3>
-          <p>Full rotational mechanics, automated factory conveyors, and mechanical assemblies.</p>
+      <!-- Auto Data Grid from GitHub -->
+      <div class="meta-strip">
+        <div class="meta-cell">
+          <span class="meta-label">Archive Size</span>
+          <span class="meta-val" id="fileSize">Checking...</span>
         </div>
-        <div class="feature-card">
-          <h3>Custom Generation</h3>
-          <p>Terralith biomes, deep Tectonic river canyons, and overhauled themed villages.</p>
+        <div class="meta-cell">
+          <span class="meta-label">Total Downloads</span>
+          <span class="meta-val" id="downloadCount">--</span>
         </div>
-        <div class="feature-card">
-          <h3>Instanced Looting</h3>
-          <p>Lootr chests give each player dedicated rewards so raided dungeons never run dry.</p>
+        <div class="meta-cell">
+          <span class="meta-label">Release Build</span>
+          <span class="meta-val" id="releaseTag">v1.0.0</span>
         </div>
-        <div class="feature-card">
-          <h3>Optimized Visuals</h3>
-          <p>Bundled with Sodium rendering, Iris shaderpack support, and entity culling engines.</p>
+        <div class="meta-cell">
+          <span class="meta-label">Updated</span>
+          <span class="meta-val" id="publishDate">--</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Installation Steps -->
-    <div class="card">
-      <h2>Setup Guide</h2>
-      <div class="step-list">
-        <div class="step-item">
-          <div class="step-num">1</div>
-          <div>Download the <strong>NeoForge_1.21.1_Full_Player_Pack.zip</strong> package above.</div>
+    <!-- How to Install (Step-by-Step for Humans) -->
+    <section class="card">
+      <h2 class="section-title">How to Install This on Your Launcher</h2>
+      <p class="section-subtitle">Takes about 2 minutes. Follow these 4 steps in order:</p>
+
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span class="step-badge">1</span>
+          <div class="step-content">
+            <h4>Check Your Java & Loader Version</h4>
+            <p>Ensure you have <strong>NeoForge 1.21.1</strong> installed (NOT Fabric, NOT normal Forge). This version strictly requires <strong>Java 21</strong> to boot.</p>
+          </div>
         </div>
-        <div class="step-item">
-          <div class="step-num">2</div>
-          <div>Extract the archive folder using 7-Zip, WinRAR, or your built-in unzipper.</div>
+
+        <div class="guide-step">
+          <span class="step-badge">2</span>
+          <div class="step-content">
+            <h4>Extract the Zip File</h4>
+            <p>Don't just drag the entire <code>.zip</code> into your mods folder. Extract it first with 7-Zip, WinRAR, or ZArchiver. You should see separate <code>.jar</code> files inside.</p>
+          </div>
         </div>
-        <div class="step-item">
-          <div class="step-num">3</div>
-          <div>Drop the extracted <code>.jar</code> files directly into your instance's <code>mods/</code> folder.</div>
+
+        <div class="guide-step">
+          <span class="step-badge">3</span>
+          <div class="step-content">
+            <h4>Move into Your <code>mods/</code> Directory</h4>
+            <p>Copy every extracted <code>.jar</code> into your Minecraft profile's mods folder:</p>
+            <div class="code-box">
+              <span>Windows:</span> <code>%appdata%\.minecraft\mods</code><br>
+              <span>Prism / CurseForge:</span> Open Instance &rarr; Click "Open Folder" &rarr; <code>mods</code><br>
+              <span>PojavLauncher:</span> <code>/sdcard/Android/data/net.kdt.pojavlaunch/files/.minecraft/mods</code>
+            </div>
+          </div>
         </div>
-        <div class="step-item">
-          <div class="step-num">4</div>
-          <div>Boot via <strong>NeoForge 21.1.x</strong> profile and join using the IP above.</div>
+
+        <div class="guide-step">
+          <span class="step-badge">4</span>
+          <div class="step-content">
+            <h4>Set Your Memory to 4GB – 6GB</h4>
+            <p>Because Create and Terralith generate huge structures, give the game at least <strong>4096 MB</strong> of RAM in your launcher settings to stop lag spikes.</p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Bundled Mod List -->
-    <div class="card">
-      <h2>Pack Dependencies</h2>
-      <div class="mods-cloud">
-        <span class="mod-pill">Create 6.0</span>
-        <span class="mod-pill">Create Deco</span>
-        <span class="mod-pill">Terralith</span>
-        <span class="mod-pill">Tectonic</span>
-        <span class="mod-pill">Towns & Towers</span>
-        <span class="mod-pill">CTOV</span>
-        <span class="mod-pill">When Dungeons Arise</span>
-        <span class="mod-pill">Farmer's Delight</span>
-        <span class="mod-pill">Sophisticated Backpacks</span>
-        <span class="mod-pill">Sophisticated Storage</span>
-        <span class="mod-pill">Lootr</span>
-        <span class="mod-pill">Apotheosis</span>
-        <span class="mod-pill">Artifacts</span>
-        <span class="mod-pill">Chipped</span>
-        <span class="mod-pill">Macaw's Bridges</span>
-        <span class="mod-pill">Sodium</span>
-        <span class="mod-pill">Iris Shaders</span>
-        <span class="mod-pill">Jade</span>
-        <span class="mod-pill">EMI</span>
-        <span class="mod-pill">Xaero's Maps</span>
-      </div>
-    </div>
-
-    <!-- System Requirements & Verification Extended Drawer -->
-    <div class="card">
-      <h2>Specifications & Verification</h2>
-      <div class="specs-grid">
-        <div class="spec-item">
-          <span class="spec-label">Java</span>
-          <span class="spec-val">Java 21</span>
+    <!-- Package Manifest / What's Inside -->
+    <section class="card">
+      <div class="section-header-flex">
+        <div>
+          <h2 class="section-title">What's Inside This Pack?</h2>
+          <p class="section-subtitle" id="manifestSubtitle">Loaded directly from the release repository:</p>
         </div>
-        <div class="spec-item">
-          <span class="spec-label">NeoForge</span>
-          <span class="spec-val">21.1.x</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-label">Recommended RAM</span>
-          <span class="spec-val">6 GB</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-label">Platforms</span>
-          <span class="spec-val">Win / Linux / Mac / Pojav</span>
-        </div>
+        <span class="tag" id="assetCounter">Mod Archive</span>
       </div>
 
-      <div style="height: 12px;"></div>
-
-      <!-- Collapsible Extended Metadata Drawer -->
-      <details>
-        <summary>File Checksum & Client Configs</summary>
-        <div class="details-body">
-          <p><strong>Package SHA-256:</strong></p>
-          <p class="hash-val">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</p>
-          <br>
-          <p><strong>Config notes:</strong> Embedded with pre-tuned <code>sodium.json</code> options optimized for 12+ chunk render distance on low-end dedicated GPUs.</p>
+      <div class="manifest-container" id="contentsList">
+        <div class="manifest-item">
+          <div class="item-left">
+            <span class="item-type">CREATE</span>
+            <span class="item-name">Create Mod 6.0 + Steam & Rails</span>
+          </div>
+          <span class="item-note">Machines, trains & kinetics</span>
         </div>
-      </details>
-    </div>
+        <div class="manifest-item">
+          <div class="item-left">
+            <span class="item-type">WORLD</span>
+            <span class="item-name">Terralith & Tectonic</span>
+          </div>
+          <span class="item-note">Massive rivers & custom biomes</span>
+        </div>
+        <div class="manifest-item">
+          <div class="item-left">
+            <span class="item-type">VISUAL</span>
+            <span class="item-name">Sodium + Iris Shaders</span>
+          </div>
+          <span class="item-note">FPS boost & dynamic lighting</span>
+        </div>
+        <div class="manifest-item">
+          <div class="item-left">
+            <span class="item-type">DUNGEON</span>
+            <span class="item-name">When Dungeons Arise + Lootr</span>
+          </div>
+          <span class="item-note">Per-player instanced loot chests</span>
+        </div>
+        <div class="manifest-item">
+          <div class="item-left">
+            <span class="item-type">QOL</span>
+            <span class="item-name">Sophisticated Backpacks & Storage</span>
+          </div>
+          <span class="item-note">Upgradable chests & pouches</span>
+        </div>
+        <div class="manifest-item">
+          <div class="item-left">
+            <span class="item-type">HUD</span>
+            <span class="item-name">Jade + EMI + Xaero's Minimap</span>
+          </div>
+          <span class="item-note">Waypoints and recipe lookups</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Problems / Troubleshooting -->
+    <section class="card faq-card">
+      <h2 class="section-title">Having Trouble?</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <strong>Game crashes on startup with "Exit Code 1"?</strong>
+          <p>You probably launched with standard Forge or Fabric instead of <strong>NeoForge</strong>, or your launcher is set to Java 17 instead of Java 21.</p>
+        </div>
+        <div class="faq-item">
+          <strong>Can I add my own mods (like OptiFine)?</strong>
+          <p><strong>Do not install OptiFine</strong>—it breaks Create and Sodium immediately. Sodium and Iris are already built-in for better performance and shader support.</p>
+        </div>
+      </div>
+    </section>
 
   </div>
 
-  <script>
-    function copyServerIP(btn) {
-      const ip = document.getElementById("ipDisplay").innerText;
-      navigator.clipboard.writeText(ip).then(() => {
-        const originalText = ip;
-        document.getElementById("ipDisplay").innerText = "Copied!";
-        setTimeout(() => {
-          document.getElementById("ipDisplay").innerText = originalText;
-        }, 1500);
-      });
-    }
-  </script>
-
+  <script src="script.js?v=2"></script>
 </body>
 </html>
