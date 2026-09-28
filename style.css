@@ -174,17 +174,25 @@ h1 {
 }
 
 .btn-download {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  background: var(--accent-btn);
-  color: var(--accent-btn-text);
+  gap: 10px;
+  padding: 8px 16px;            
+  border-radius: 50px;          
+  border: 2px solid #ffffff;    
+  background-color: transparent
+  color: #ffffff;               
   text-decoration: none;
-  padding: 14px 20px;
-  border-radius: 8px;
-  transition: transform 0.1s ease, background 0.15s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   margin-bottom: 14px;
+}
+
+.btn-download:hover,
+.btn-download:active {
+  background-color: #22c55e;
+  border-color: #22c55e;
+  transform: translateY(-1px);
 }
 
 .btn-download:hover {
