@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeoForge 1.21.1 Client Pack</title>
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
 
   <div class="container">
 
-    <!-- Hero Card -->
+    <!-- Header Section -->
     <header class="card hero-card">
       <div class="badge-row">
         <span class="badge badge-accent" id="tagVersion">v1.0.0</span>
@@ -20,28 +20,28 @@
 
       <h1 id="releaseTitle">NeoForge 1.21.1 Client Pack</h1>
       <p class="hero-desc">
-        Everything you need to join our private world without mismatched blocks or crash screens. Includes Create 6.0 machinery, custom world gen biomes, instanced loot, sound physics, and low-end shader optimizations.
+        Required client package to play on the server without block mismatches or crashes. Includes Create machinery, terrain generation, custom loot, sound dynamics, and performance optimization shaders.
       </p>
 
       <div class="admin-notice">
         <div class="admin-avatar">H</div>
         <div class="admin-info">
-          <span class="admin-name">Maintained by honey_me_0</span>
-          <span class="admin-help">Need whitelist or help installing? Message me on Discord.</span>
+          <span class="admin-name">honey_me_0</span>
+          <span class="admin-help">Discord DM for whitelist and launcher help</span>
         </div>
       </div>
     </header>
 
-    <!-- Download & Live Stats Block -->
+    <!-- Download Block -->
     <section class="card download-card">
       <div class="download-top">
         <div>
           <h2 class="section-title">Ready to Play?</h2>
-          <p class="section-subtitle">Always download the latest build before joining to prevent sync disconnects.</p>
+          <p class="section-subtitle">Grab the latest build before connecting to prevent packet desync.</p>
         </div>
         <div class="live-status">
           <span class="pulse-dot"></span>
-          <span>Build verified</span>
+          <span>Verified Build</span>
         </div>
       </div>
 
@@ -57,7 +57,6 @@
         </span>
       </a>
 
-      <!-- Auto Data Grid from GitHub -->
       <div class="meta-strip">
         <div class="meta-cell">
           <span class="meta-label">Archive Size</span>
@@ -68,46 +67,45 @@
           <span class="meta-val" id="downloadCount">--</span>
         </div>
         <div class="meta-cell">
-          <span class="meta-label">Release Build</span>
+          <span class="meta-label">Release Tag</span>
           <span class="meta-val" id="releaseTag">v1.0.0</span>
         </div>
         <div class="meta-cell">
-          <span class="meta-label">Updated</span>
+          <span class="meta-label">Last Updated</span>
           <span class="meta-val" id="publishDate">--</span>
         </div>
       </div>
     </section>
 
-    <!-- How to Install (Step-by-Step for Humans) -->
+    <!-- Installation Steps -->
     <section class="card">
-      <h2 class="section-title">How to Install This on Your Launcher</h2>
-      <p class="section-subtitle">Takes about 2 minutes. Follow these 4 steps in order:</p>
+      <h2 class="section-title">Installation Guide</h2>
+      <p class="section-subtitle">Quick 4-step installation for all platforms:</p>
 
       <div class="guide-steps">
         <div class="guide-step">
           <span class="step-badge">1</span>
           <div class="step-content">
-            <h4>Check Your Java & Loader Version</h4>
-            <p>Ensure you have <strong>NeoForge 1.21.1</strong> installed (NOT Fabric, NOT normal Forge). This version strictly requires <strong>Java 21</strong> to boot.</p>
+            <h4>Check Java and Loader</h4>
+            <p>Make sure you have <strong>NeoForge 1.21.1</strong> installed. Requires <strong>Java 21</strong> strictly.</p>
           </div>
         </div>
 
         <div class="guide-step">
           <span class="step-badge">2</span>
           <div class="step-content">
-            <h4>Extract the Zip File</h4>
-            <p>Don't just drag the entire <code>.zip</code> into your mods folder. Extract it first with 7-Zip, WinRAR, or ZArchiver. You should see separate <code>.jar</code> files inside.</p>
+            <h4>Extract the Archive</h4>
+            <p>Do not paste the raw zip. Extract it first using WinRAR, 7-Zip, or ZArchiver to get individual <code>.jar</code> files.</p>
           </div>
         </div>
 
         <div class="guide-step">
           <span class="step-badge">3</span>
           <div class="step-content">
-            <h4>Move into Your <code>mods/</code> Directory</h4>
-            <p>Copy every extracted <code>.jar</code> into your Minecraft profile's mods folder:</p>
+            <h4>Transfer to mods Directory</h4>
             <div class="code-box">
               <span>Windows:</span> <code>%appdata%\.minecraft\mods</code><br>
-              <span>Prism / CurseForge:</span> Open Instance &rarr; Click "Open Folder" &rarr; <code>mods</code><br>
+              <span>Prism / CurseForge:</span> Instance Folder &rarr; <code>mods</code><br>
               <span>PojavLauncher:</span> <code>/sdcard/Android/data/net.kdt.pojavlaunch/files/.minecraft/mods</code>
             </div>
           </div>
@@ -116,86 +114,98 @@
         <div class="guide-step">
           <span class="step-badge">4</span>
           <div class="step-content">
-            <h4>Set Your Memory to 4GB – 6GB</h4>
-            <p>Because Create and Terralith generate huge structures, give the game at least <strong>4096 MB</strong> of RAM in your launcher settings to stop lag spikes.</p>
+            <h4>Memory Allocation</h4>
+            <p>Allocate <strong>4GB to 6GB (4096MB+)</strong> of RAM in launcher settings to prevent chunk stuttering.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Package Manifest / What's Inside -->
+    <!-- Manifest -->
     <section class="card">
       <div class="section-header-flex">
         <div>
-          <h2 class="section-title">What's Inside This Pack?</h2>
-          <p class="section-subtitle" id="manifestSubtitle">Loaded directly from the release repository:</p>
+          <h2 class="section-title">Included Mods</h2>
+          <p class="section-subtitle" id="manifestSubtitle">Bundled core modifications:</p>
         </div>
-        <span class="tag" id="assetCounter">Mod Archive</span>
+        <span class="tag" id="assetCounter">Archive</span>
       </div>
 
       <div class="manifest-container" id="contentsList">
         <div class="manifest-item">
           <div class="item-left">
-            <span class="item-type">CREATE</span>
+            <span class="item-type">TECH</span>
             <span class="item-name">Create Mod 6.0 + Steam & Rails</span>
           </div>
-          <span class="item-note">Machines, trains & kinetics</span>
+          <span class="item-note">Mechanisms and trains</span>
         </div>
         <div class="manifest-item">
           <div class="item-left">
             <span class="item-type">WORLD</span>
             <span class="item-name">Terralith & Tectonic</span>
           </div>
-          <span class="item-note">Massive rivers & custom biomes</span>
+          <span class="item-note">Worldgen & biomes</span>
         </div>
         <div class="manifest-item">
           <div class="item-left">
-            <span class="item-type">VISUAL</span>
+            <span class="item-type">PERF</span>
             <span class="item-name">Sodium + Iris Shaders</span>
           </div>
-          <span class="item-note">FPS boost & dynamic lighting</span>
-        </div>
-        <div class="manifest-item">
-          <div class="item-left">
-            <span class="item-type">DUNGEON</span>
-            <span class="item-name">When Dungeons Arise + Lootr</span>
-          </div>
-          <span class="item-note">Per-player instanced loot chests</span>
-        </div>
-        <div class="manifest-item">
-          <div class="item-left">
-            <span class="item-type">QOL</span>
-            <span class="item-name">Sophisticated Backpacks & Storage</span>
-          </div>
-          <span class="item-note">Upgradable chests & pouches</span>
-        </div>
-        <div class="manifest-item">
-          <div class="item-left">
-            <span class="item-type">HUD</span>
-            <span class="item-name">Jade + EMI + Xaero's Minimap</span>
-          </div>
-          <span class="item-note">Waypoints and recipe lookups</span>
+          <span class="item-note">Rendering engine</span>
         </div>
       </div>
     </section>
 
-    <!-- Common Problems / Troubleshooting -->
+    <!-- Request a Mod Section -->
+    <section class="card">
+      <h2 class="section-title">Request a Mod</h2>
+      <p class="section-subtitle">Suggest performance mods or utilities for the next client build.</p>
+
+      <form class="custom-form" id="modRequestForm">
+        <div class="form-row">
+          <input type="text" id="modName" placeholder="Mod Name (e.g., AppleSkin)" required />
+          <input type="text" id="modPlatform" placeholder="Platform link (CurseForge / Modrinth)" />
+        </div>
+        <textarea id="modReason" rows="2" placeholder="Why should we add this?"></textarea>
+        <button type="submit" class="btn-action">Submit Suggestion</button>
+      </form>
+    </section>
+
+    <!-- Feedback & Comments Section -->
+    <section class="card">
+      <h2 class="section-title">Feedback & Reports</h2>
+      <p class="section-subtitle">Leave feedback, bugs, or join discussions.</p>
+
+      <form class="custom-form" id="commentForm">
+        <div class="form-row">
+          <input type="text" id="authorName" placeholder="IGN / Name" required />
+        </div>
+        <textarea id="commentMsg" rows="3" placeholder="Write your message..." required></textarea>
+        <button type="submit" class="btn-action">Post Comment</button>
+      </form>
+
+      <div class="comments-list" id="commentsFeed">
+        <!-- Injected via script -->
+      </div>
+    </section>
+
+    <!-- FAQ -->
     <section class="card faq-card">
-      <h2 class="section-title">Having Trouble?</h2>
+      <h2 class="section-title">Troubleshooting</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <strong>Game crashes on startup with "Exit Code 1"?</strong>
-          <p>You probably launched with standard Forge or Fabric instead of <strong>NeoForge</strong>, or your launcher is set to Java 17 instead of Java 21.</p>
+          <strong>Game crashes with Exit Code 1?</strong>
+          <p>Check if your launcher profile is set to Java 21 and the modloader is NeoForge (not legacy Forge).</p>
         </div>
         <div class="faq-item">
-          <strong>Can I add my own mods (like OptiFine)?</strong>
-          <p><strong>Do not install OptiFine</strong>—it breaks Create and Sodium immediately. Sodium and Iris are already built-in for better performance and shader support.</p>
+          <strong>OptiFine support?</strong>
+          <p>OptiFine is unsupported and crashes Sodium. Use Iris for shader configurations instead.</p>
         </div>
       </div>
     </section>
 
   </div>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
