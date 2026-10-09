@@ -37,7 +37,7 @@
       <div class="download-top">
         <div>
           <h2 class="section-title">Ready to Play!</h2>
-          <p class="section-subtitle">Letest Build.</p>
+          <p class="section-subtitle">Latest Build</p>
         </div>
         <div class="live-status">
           <span class="pulse-dot"></span>
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <a class="btn-download" id="downloadBtn" href="https://github.com/viewsgaming/Public/releases/download/1.0.5(beta)/NeoForge_1.21.1_Modpack.zip">
+      <a class="btn-download" id="downloadBtn" href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/Neoforge_1.21.1_modpack.zip">
         <svg viewBox="0 0 24 24" class="dl-icon">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
@@ -53,7 +53,7 @@
         </svg>
         <span class="dl-text">
           <strong>Download Full Package (.ZIP)</strong>
-          <small id="fileName">NeoForge_1.21.1_Modpack.zip</small>
+          <small id="fileName">Neoforge_1.21.1_modpack.zip</small>
         </span>
       </a>
 
@@ -94,20 +94,21 @@
         <div class="guide-step">
           <span class="step-badge">2</span>
           <div class="step-content">
-            <h4>Extract the Archive</h4>
-            <p>Do not paste the raw zip. Extract it first using WinRAR, 7-Zip, or ZArchiver to get individual <code>.jar</code> files.</p>
+            <h4>Extract directly to Game Directory</h4>
+            <p>The zip already includes the <code>mods/</code> folder inside. Extract it straight into your Minecraft root folder:</p>
+            <div class="code-box">
+              <span>Windows:</span> <code>%appdata%\.minecraft\</code><br>
+              <span>Prism / CurseForge:</span> Instance Folder &rarr; <code>.minecraft</code><br>
+              <span>PojavLauncher:</span> <code>/sdcard/Android/data/net.kdt.pojavlaunch/files/.minecraft/</code>
+            </div>
           </div>
         </div>
 
         <div class="guide-step">
           <span class="step-badge">3</span>
           <div class="step-content">
-            <h4>Transfer to mods Directory</h4>
-            <div class="code-box">
-              <span>Windows:</span> <code>%appdata%\.minecraft\mods</code><br>
-              <span>Prism / CurseForge:</span> Instance Folder &rarr; <code>mods</code><br>
-              <span>PojavLauncher:</span> <code>/sdcard/Android/data/net.kdt.pojavlaunch/files/.minecraft/mods</code>
-            </div>
+            <h4>Clean Old Mods (Optional)</h4>
+            <p>If upgrading from an older version, clear any older duplicated <code>.jar</code> files inside your existing <code>mods/</code> folder before launching.</p>
           </div>
         </div>
 
