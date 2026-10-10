@@ -1,212 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NeoForge 1.21.1 Client Pack</title>
-  <link rel="stylesheet" href="style.css?v=3" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modpack Distribution & Deployment Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-elevated: rgba(22, 27, 34, 0.7);
+      --bg-subtle: rgba(33, 38, 45, 0.5);
+      --border-default: rgba(48, 54, 61, 0.8);
+      --border-accent: #388bfd;
+      --text-primary: #c9d1d9;
+      --text-heading: #f0f6fc;
+      --text-muted: #8b949e;
+      --text-link: #58a6ff;
+      --code-bg: #161b22;
+      --accent-blue: #1f6feb;
+      --accent-green: #238636;
+      --accent-amber: #d29922;
+      --radius: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 40px 20px 80px 20px;
+    }
+
+    .wrapper {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border-default);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand-meta {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-subtle);
+    }
+
+    .brand-logo svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--text-heading);
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-heading);
+      letter-spacing: -0.2px;
+    }
+
+    .sub-heading {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: 'Fira Code', monospace;
+      border: 1px solid var(--border-default);
+      background: var(--bg-subtle);
+      color: var(--text-primary);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-green);
+    }
+
+    .notice-box {
+      border: 1px solid var(--border-default);
+      background: var(--bg-subtle);
+      border-left: 4px solid var(--accent-blue);
+      padding: 16px;
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+    }
+
+    .notice-box p {
+      margin-bottom: 6px;
+    }
+
+    .notice-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .selector-bar {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-default);
+      margin-bottom: 24px;
+    }
+
+    .selector-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      border-bottom: none;
+      padding: 10px 16px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: var(--radius) var(--radius) 0 0;
+      position: relative;
+      top: 1px;
+    }
+
+    .selector-btn.active {
+      background: var(--bg);
+      border-color: var(--border-default);
+      border-top: 2px solid var(--accent-blue);
+      color: var(--text-heading);
+      font-weight: 600;
+    }
+
+    .panel {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(8px);
+    }
+
+    .file-details-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-default);
+      flex-wrap: wrap;
+    }
+
+    .file-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-heading);
+      font-family: 'Fira Code', monospace;
+    }
+
+    .btn-download {
+      background-color: var(--accent-green);
+      color: #fff;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-download:hover {
+      background-color: #2ea043;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .spec-table th,
+    .spec-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-default);
+      font-size: 13px;
+    }
+
+    .spec-table th {
+      color: var(--text-muted);
+      font-weight: 500;
+      width: 30%;
+    }
+
+    .spec-table td {
+      color: var(--text-heading);
+      font-family: 'Fira Code', monospace;
+    }
+
+    .url-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .url-block code {
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .copy-button {
+      background: transparent;
+      border: 1px solid var(--border-default);
+      color: var(--text-primary);
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .copy-button:hover {
+      background: var(--bg-subtle);
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 16px;
+    }
+
+    .documentation-section {
+      margin-bottom: 32px;
+    }
+
+    .grid-scenarios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .scenario-box {
+      border: 1px solid var(--border-default);
+      background: var(--bg-subtle);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .scenario-box h3 {
+      font-size: 14px;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+    }
+
+    .scenario-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-family: 'Fira Code', monospace;
+      border-radius: 4px;
+      background: var(--code-bg);
+      border: 1px solid var(--border-default);
+      color: var(--text-link);
+    }
+
+    ol.instruction-steps {
+      padding-left: 20px;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    ol.instruction-steps li {
+      margin-bottom: 14px;
+      padding-left: 6px;
+    }
+
+    ol.instruction-steps li strong {
+      color: var(--text-heading);
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border-default);
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-top: 6px;
+      overflow-x: auto;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-default);
+      padding-top: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .spec-table th, .spec-table td {
+        display: block;
+        width: 100%;
+      }
+      .spec-table th {
+        border-bottom: none;
+        padding-bottom: 2px;
+      }
+      .url-block {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
-
-    <!-- Header Section -->
-    <header class="card hero-card">
-      <div class="badge-row">
-        <span class="badge badge-accent" id="tagVersion">v1.0.0</span>
-        <span class="badge">Minecraft 1.21.1</span>
-        <span class="badge">NeoForge Only</span>
-      </div>
-
-      <h1 id="releaseTitle">NeoForge 1.21.1 Client Pack</h1>
-      <p class="hero-desc">
-        Includes Create machinery, terrain generation, custom loot, sound dynamics, and performance optimization shaders.
-      </p>
-
-      <div class="admin-notice">
-        <div class="admin-avatar">H</div>
-        <div class="admin-info">
-          <span class="admin-name">honey_me_0</span>
-          <span class="admin-help">Discord DM for launcher help</span>
-        </div>
-      </div>
-    </header>
-
-    <!-- Download Block -->
-    <section class="card download-card">
-      <div class="download-top">
-        <div>
-          <h2 class="section-title">Ready to Play!</h2>
-          <p class="section-subtitle">Latest Build</p>
-        </div>
-        <div class="live-status">
-          <span class="pulse-dot"></span>
-          <span>Verified Build</span>
-        </div>
-      </div>
-
-      <a class="btn-download" id="downloadBtn" href="https://github.com/viewsgaming/Public/releases/download/v1.0.0/Neoforge_1.21.1_modpack.zip">
-        <svg viewBox="0 0 24 24" class="dl-icon">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
+<div class="wrapper">
+  <header>
+    <div class="brand-meta">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+          <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+          <line x1="6" y1="6" x2="6.01" y2="6"></line>
+          <line x1="6" y1="18" x2="6.01" y2="18"></line>
         </svg>
-        <span class="dl-text">
-          <strong>Download Full Package (.ZIP)</strong>
-          <small id="fileName">Neoforge_1.21.1_modpack.zip</small>
-        </span>
-      </a>
-
-      <div class="meta-strip">
-        <div class="meta-cell">
-          <span class="meta-label">Archive Size</span>
-          <span class="meta-val" id="fileSize">Checking...</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-label">Total Downloads</span>
-          <span class="meta-val" id="downloadCount">--</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-label">Release Tag</span>
-          <span class="meta-val" id="releaseTag">v1.0.0</span>
-        </div>
-        <div class="meta-cell">
-          <span class="meta-label">Last Updated</span>
-          <span class="meta-val" id="publishDate">--</span>
-        </div>
       </div>
-    </section>
-
-    <!-- Installation Steps -->
-    <section class="card">
-      <h2 class="section-title">Installation Guide</h2>
-      <p class="section-subtitle">Quick 4-step installation for all platforms:</p>
-
-      <div class="guide-steps">
-        <div class="guide-step">
-          <span class="step-badge">1</span>
-          <div class="step-content">
-            <h4>Check Java and Loader</h4>
-            <p>Make sure you have <strong>NeoForge 1.21.1</strong> installed. Requires <strong>Java 21</strong> strictly.</p>
-          </div>
-        </div>
-
-        <div class="guide-step">
-          <span class="step-badge">2</span>
-          <div class="step-content">
-            <h4>Extract directly to Game Directory</h4>
-            <p>The zip already includes the <code>mods/</code> folder inside. Extract it straight into your Minecraft root folder:</p>
-            <div class="code-box">
-              <span>Windows:</span> <code>%appdata%\.minecraft\</code><br>
-              <span>Prism / CurseForge:</span> Instance Folder &rarr; <code>.minecraft</code><br>
-              <span>PojavLauncher:</span> <code>/sdcard/Android/data/net.kdt.pojavlaunch/files/.minecraft/</code>
-            </div>
-          </div>
-        </div>
-
-        <div class="guide-step">
-          <span class="step-badge">3</span>
-          <div class="step-content">
-            <h4>Clean Old Mods (Optional)</h4>
-            <p>If upgrading from an older version, clear any older duplicated <code>.jar</code> files inside your existing <code>mods/</code> folder before launching.</p>
-          </div>
-        </div>
-
-        <div class="guide-step">
-          <span class="step-badge">4</span>
-          <div class="step-content">
-            <h4>Memory Allocation</h4>
-            <p>Allocate <strong>4GB to 6GB (4096MB+)</strong> of RAM in launcher settings to prevent chunk stuttering.</p>
-          </div>
-        </div>
+      <div>
+        <h1>Repository</h1>
+        <p class="sub-heading">Release 2.0 Maintenance & Binary Distributions</p>
       </div>
-    </section>
+    </div>
+    <div class="status-badge">
+      <div class="dot"></div>
+      <span>Release 2.0 Live</span>
+    </div>
+  </header>
 
-    <!-- Manifest -->
-    <section class="card">
-      <div class="section-header-flex">
-        <div>
-          <h2 class="section-title">Included Mods</h2>
-          <p class="section-subtitle" id="manifestSubtitle">Bundled core modifications:</p>
-        </div>
-        <span class="tag" id="assetCounter">Archive</span>
-      </div>
-
-      <div class="manifest-container" id="contentsList">
-        <div class="manifest-item">
-          <div class="item-left">
-            <span class="item-type">TECH</span>
-            <span class="item-name">Create Mod 6.0 + Steam & Rails</span>
-          </div>
-          <span class="item-note">Mechanisms and trains</span>
-        </div>
-        <div class="manifest-item">
-          <div class="item-left">
-            <span class="item-type">WORLD</span>
-            <span class="item-name">Terralith & Tectonic</span>
-          </div>
-          <span class="item-note">Worldgen & biomes</span>
-        </div>
-        <div class="manifest-item">
-          <div class="item-left">
-            <span class="item-type">PERF</span>
-            <span class="item-name">Sodium + Iris Shaders</span>
-          </div>
-          <span class="item-note">Rendering engine</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Request a Mod Section -->
-    <section class="card">
-      <h2 class="section-title">Request a Mod</h2>
-      <p class="section-subtitle">Suggest performance mods or utilities for the next client build.</p>
-
-      <form class="custom-form" id="modRequestForm">
-        <div class="form-row">
-          <input type="text" id="modName" placeholder="Mod Name (e.g., AppleSkin)" required />
-          <input type="text" id="modPlatform" placeholder="Platform link (CurseForge / Modrinth)" />
-        </div>
-        <textarea id="modReason" rows="2" placeholder="Why should we add this?"></textarea>
-        <button type="submit" class="btn-action">Submit Suggestion</button>
-      </form>
-    </section>
-
-    <!-- Feedback & Comments Section -->
-    <section class="card">
-      <h2 class="section-title">Feedback & Reports</h2>
-      <p class="section-subtitle">Leave feedback, bugs, or join discussions.</p>
-
-      <form class="custom-form" id="commentForm">
-        <div class="form-row">
-          <input type="text" id="authorName" placeholder="IGN / Name" required />
-        </div>
-        <textarea id="commentMsg" rows="3" placeholder="Write your message..." required></textarea>
-        <button type="submit" class="btn-action">Post Comment</button>
-      </form>
-
-      <div class="comments-list" id="commentsFeed">
-        <!-- Injected via script -->
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="card faq-card">
-      <h2 class="section-title">Troubleshooting</h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <strong>Game crashes with Exit Code 1?</strong>
-          <p>Check if your launcher profile is set to Java 21 and the modloader is NeoForge (not legacy Forge).</p>
-        </div>
-        <div class="faq-item">
-          <strong>OptiFine support?</strong>
-          <p>OptiFine is unsupported and crashes Sodium. Use Iris for shader configurations instead.</p>
-        </div>
-      </div>
-    </section>
-
+  <div class="notice-box">
+    <p><strong>Deployment Note:</strong> Modpack archives are separated by execution scope. Do not combine server libraries into client distributions or include visual render mods in headless server execution environments.</p>
+    <p class="sub-heading">GitHub Repository: <code>viewsgaming/Public</code> | Release Tag: <code>Version_2.0</code></p>
   </div>
 
-  <script src="script.js?v=3"></script>
+  <div class="selector-bar">
+    <button type="button" id="btnTabClient" class="selector-btn active" onclick="switchDistribution('client')">PlayersOnly.Pack.zip</button>
+    <button type="button" id="btnTabServer" class="selector-btn" onclick="switchDistribution('server')">ServerOnly.Pack.zip</button>
+  </div>
+
+  <div class="panel">
+    <div class="file-details-header">
+      <div>
+        <div class="file-title" id="lblFileName">PlayersOnly.Pack.zip</div>
+        <div class="sub-heading" id="lblFileTarget">Environment: Client instances (Singleplayer, Multi-player Client)</div>
+      </div>
+      <a id="btnMainDownload" href="https://github.com/viewsgaming/Public/releases/download/Version_2.0/PlayersOnly.Pack.zip" class="btn-download" download>
+        <span>Download Archive</span>
+      </a>
+    </div>
+
+    <table class="spec-table">
+      <tbody>
+        <tr>
+          <th>Calculated Size</th>
+          <td id="lblCalculatedSize">Fetching API data...</td>
+        </tr>
+        <tr>
+          <th>Direct Download Count</th>
+          <td id="lblDownloadCount">Reading repository...</td>
+        </tr>
+        <tr>
+          <th>Supported Java Runtime</th>
+          <td id="lblJavaTarget">Java 17 LTS / Java 21</td>
+        </tr>
+        <tr>
+          <th>Target Mod Loader</th>
+          <td id="lblLoader">Fabric / Forge (Check instance manifest)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="url-block">
+      <code id="lblReleaseUrl">https://github.com/viewsgaming/Public/releases/download/Version_2.0/PlayersOnly.Pack.zip</code>
+      <button type="button" class="copy-button" onclick="copyCurrentUrl()">Copy Direct URL</button>
+    </div>
+  </div>
+
+  <div class="documentation-section">
+    <h2>Architecture & Configuration Guide</h2>
+    
+    <div class="grid-scenarios">
+      <div class="scenario-box">
+        <h3>1. Solo Play / Client Join</h3>
+        <p>If you only plan to play on your own computer or connect to an already hosted server run by someone else.</p>
+        <div class="tag">Requires: PlayersOnly.Pack.zip</div>
+      </div>
+
+      <div class="scenario-box">
+        <h3>2. Dedicated VPS / Dedicated Node</h3>
+        <p>For standalone Debian/Ubuntu/Windows server environments running the world headlessly without a GUI.</p>
+        <div class="tag">Requires: ServerOnly.Pack.zip</div>
+      </div>
+
+      <div class="scenario-box">
+        <h3>3. Host on Own PC & Play Simultaneously</h3>
+        <p>Run the Server Pack in a terminal background, and launch the Players Pack locally to connect via <code>localhost</code>.</p>
+        <div class="tag">Requires: Both Archives</div>
+      </div>
+    </div>
+
+    <h2>Step-by-Step Installation Documentation</h2>
+    <div id="installationDocumentation">
+      <ol class="instruction-steps" id="instructionList">
+      </ol>
+    </div>
+  </div>
+
+  <footer>
+    <p>GitHub Pages Deployment &bull; 2026</p>
+  </footer>
+</div>
+
+<script>
+  const metadata = {
+    client: {
+      name: "PlayersOnly.Pack.zip",
+      url: "https://github.com/viewsgaming/Public/releases/download/Version_2.0/PlayersOnly.Pack.zip",
+      target: "Environment: Client instances (Singleplayer, Multi-player Client)",
+      java: "Java 17 LTS or Java 21 LTS (64-bit)",
+      loader: "Fabric / Forge instance runtime",
+      steps: [
+        {
+          title: "Archive Extraction",
+          text: "Unpack the downloaded zip archive using default filesystem tools or 7-Zip."
+        },
+        {
+          title: "File Placement",
+          text: "Copy the extracted folders into your root game directory path:",
+          code: "%appdata%\\.minecraft\\"
+        },
+        {
+          title: "JVM Flag Allocation",
+          text: "Configure memory parameters in your launcher profile settings before booting:",
+          code: "-Xms4G -Xmx6G -XX:+UseG1GC"
+        }
+      ]
+    },
+    server: {
+      name: "ServerOnly.Pack.zip",
+      url: "https://github.com/viewsgaming/Public/releases/download/Version_2.0/ServerOnly.Pack.zip",
+      target: "Environment: Dedicated Linux/Windows host (Headless execution)",
+      java: "Java 17 or Java 21 Headless JRE",
+      loader: "Dedicated Server JAR (Fabric/Forge)",
+      steps: [
+        {
+          title: "Deploy Archive to Root",
+          text: "Transfer ServerOnly.Pack.zip to your VPS directory alongside your server engine executable."
+        },
+        {
+          title: "Confirm EULA Agreement",
+          text: "Create or edit eula.txt to reflect full user agreement acceptance:",
+          code: "eula=true"
+        },
+        {
+          title: "Network Port Mapping",
+          text: "Forward external communication port 25565 over TCP and UDP protocols."
+        },
+        {
+          title: "Terminal Execution Script",
+          text: "Launch the host execution wrapper with headless console flags:",
+          code: "java -Xms4G -Xmx8G -jar server.jar nogui"
+        }
+      ]
+    }
+  };
+
+  let currentSelection = 'client';
+
+  function switchDistribution(target) {
+    currentSelection = target;
+    const item = metadata[target];
+
+    document.getElementById('btnTabClient').className = target === 'client' ? 'selector-btn active' : 'selector-btn';
+    document.getElementById('btnTabServer').className = target === 'server' ? 'selector-btn active' : 'selector-btn';
+
+    document.getElementById('lblFileName').textContent = item.name;
+    document.getElementById('lblFileTarget').textContent = item.target;
+    document.getElementById('lblJavaTarget').textContent = item.java;
+    document.getElementById('lblLoader').textContent = item.loader;
+    document.getElementById('lblReleaseUrl').textContent = item.url;
+    document.getElementById('btnMainDownload').href = item.url;
+
+    renderDocumentation(item.steps);
+    renderGithubApiData();
+  }
+
+  function renderDocumentation(steps) {
+    const container = document.getElementById('instructionList');
+    container.innerHTML = '';
+
+    steps.forEach((step, index) => {
+      const li = document.createElement('li');
+      let innerContent = `<strong>${step.title}:</strong> ${step.text}`;
+      if (step.code) {
+        innerContent += `<pre><code>${step.code}</code></pre>`;
+      }
+      li.innerHTML = innerContent;
+      container.appendChild(li);
+    });
+  }
+
+  function copyCurrentUrl() {
+    const url = document.getElementById('lblReleaseUrl').textContent;
+    navigator.clipboard.writeText(url).then(() => {
+      alert("URL copied to clipboard.");
+    });
+  }
+
+  function renderGithubApiData() {
+    const apiUrl = "https://api.github.com/repos/viewsgaming/Public/releases/tags/Version_2.0";
+    
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network error');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const targetFilename = metadata[currentSelection].name;
+        const asset = data.assets.find(a => a.name === targetFilename);
+
+        if (asset) {
+          const mb = (asset.size / (1024 * 1024)).toFixed(2);
+          document.getElementById('lblCalculatedSize').textContent = `${mb} MB (${asset.size.toLocaleString()} bytes)`;
+          document.getElementById('lblDownloadCount').textContent = `${asset.download_count.toLocaleString()} times`;
+        } else {
+          document.getElementById('lblCalculatedSize').textContent = "Not found in release assets";
+          document.getElementById('lblDownloadCount').textContent = "Unavailable";
+        }
+      })
+      .catch(() => {
+        document.getElementById('lblCalculatedSize').textContent = "Local Cached / Dynamic Query";
+        document.getElementById('lblDownloadCount').textContent = "API Rate Limited / Not Available";
+      });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    switchDistribution('client');
+  });
+</script>
+
 </body>
 </html>
