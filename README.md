@@ -9,9 +9,7 @@ Required mods to play on our server. Keep this updated to avoid version mismatch
 - **RAM:** 4–6 GB allocated
 
 ## Setup
-1. Download the zip from [Releases](https://github.com/viewsgaming/Public/releases/latest).
-2. Unzip it (don't leave it as a zip file).
-3. Clear your current `mods/` folder to avoid conflicts, then drop all the `.jar` files in:
+Clear your current `mods/` folder to avoid conflicts, then drop all the `.jar` files in:
    - Windows: `%appdata%\.minecraft\mods`
    - Prism / CurseForge: Open instance folder -> `mods`
    - PojavLauncher: `/sdcard/Android/data/net.kdt.pojavlaunch/files/.minecraft/mods/`
